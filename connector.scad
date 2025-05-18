@@ -1,6 +1,7 @@
 //================================================================
 //  Geodesic‐Dome Pipe Connector Library (with default $fn)
 //================================================================
+// Modified from: https://infinityplays.com/3d-part-design-with-openscad-56-making-geodesic-dome-hubs-with-the-pipe-fitting-module/
 
 //──────────────────────── Configuration ────────────────────────
 show_fitting = true;
