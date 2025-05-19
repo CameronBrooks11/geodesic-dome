@@ -24,7 +24,6 @@ outer_rad = outer_dia / 2;
 
 // branch list entries can now be either
 //  > 6‑element arrays: [ 0:on?, 1:[tilt,azimuth,roll_in,roll_out], 2:outØ, 3:inØ, 4:len, 5: translate_out ]
-//  > 8‑element arrays: [ 0:on?, 1:[tilt,azimuth,roll_in,roll_out], 2:outØ, 3:inØ, 4:len, 5: translate_out, 6:out_fn, 7:in_fn ]
 branches = [
   [true, [tilt, 0, roll_in, roll_out], outer_dia, inner_dia, length, translate_out],
   [true, [tilt, 60, roll_in, roll_out], outer_dia, inner_dia, length, translate_out],
@@ -33,11 +32,6 @@ branches = [
   [true, [tilt, 240, roll_in, roll_out], outer_dia, inner_dia, length, translate_out],
   [true, [tilt, 300, roll_in, roll_out], outer_dia, inner_dia, length, translate_out]
 ];
-
-//──────────────────────── Helpers ─────────────────────────────
-// safely grab branch[idx] or default to default_facet
-function branch_fn_in(b, idx) = len(b) > idx ? b[idx] : default_facet_in;
-function branch_fn_out(b, idx) = len(b) > idx ? b[idx] : default_facet_out;
 
 //──────────────────────── Module Definitions ────────────────────
 // draw the central sphere
@@ -61,7 +55,7 @@ module fitting_inside(branch_list) {
                 h=b[4] + translate_out,
                 r=b[3] / 2,
                 center=false,
-                $fn=branch_fn_in(b, 7)
+                $fn=default_facet_in
               );
     }
   }
@@ -80,7 +74,7 @@ module fitting_outside(branch_list) {
                 h=b[4],
                 r=b[2] / 2,
                 center=false,
-                $fn=branch_fn_out(b, 6)
+                $fn=default_facet_out
               );
     }
   }
