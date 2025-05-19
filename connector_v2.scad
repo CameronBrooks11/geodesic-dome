@@ -8,19 +8,15 @@ show_fitting = true;
 inner_facets = 64; // default $fn for all branches
 outer_facets = 8; // default $fn for all branches
 
-rotZ_out = 0; // rotation around Z axis for the outer cylinder
-rotZ_in = 0; // rotation around Z axis for the inner cylinder
 inner_dia = 20; // inner diameter of the pipe
 outer_dia = 30; // outer diameter of the pipe
 length = 50; // length of the pipe
 num = 6; // number of facets for the pipe
 translate_out = 12; // translation out from center point
+
 tilt = 100;
 roll_out = 45/2;
 roll_in = 0;
-
-outer_rad = outer_dia / 2;
-
 
 // branch list entries can now be either
 //  > 6‑element arrays: [ 0:on?, 1:[tilt,azimuth,roll_in,roll_out], 2:outØ, 3:inØ, 4:len, 5: translate_out ]
