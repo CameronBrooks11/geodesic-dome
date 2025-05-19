@@ -5,8 +5,8 @@
 
 //──────────────────────── Configuration ────────────────────────
 show_fitting = true;
-default_facet_in = 64; // default $fn for all branches
-default_facet_out = 8; // default $fn for all branches
+inner_facets = 64; // default $fn for all branches
+outer_facets = 8; // default $fn for all branches
 
 rotZ_out = 0; // rotation around Z axis for the outer cylinder
 rotZ_in = 0; // rotation around Z axis for the inner cylinder
@@ -55,7 +55,7 @@ module fitting_inside(branch_list) {
                 h=b[4] + translate_out,
                 r=b[3] / 2,
                 center=false,
-                $fn=default_facet_in
+                $fn=inner_facets
               );
     }
   }
@@ -74,7 +74,7 @@ module fitting_outside(branch_list) {
                 h=b[4],
                 r=b[2] / 2,
                 center=false,
-                $fn=default_facet_out
+                $fn=outer_facets
               );
     }
   }
