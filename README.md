@@ -85,5 +85,5 @@ material and the print.
 The hub design grew from the pipe-fitting hubs in
 [3D part design with OpenSCAD 56: making geodesic dome hubs](https://infinityplays.com/3d-part-design-with-openscad-56-making-geodesic-dome-hubs-with-the-pipe-fitting-module/).
 Its earlier versions, `connector_v1.scad` to `connector_v3.scad`, are in this
-repository's history. The repository is under the GNU AGPL-3.0; see
-[LICENSE](LICENSE).
+repository's history; none of their code or the tutorial's is in
+`geodesic_dome.scad`. MIT; see [LICENSE](LICENSE).
