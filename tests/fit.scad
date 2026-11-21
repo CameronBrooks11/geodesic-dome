@@ -11,6 +11,6 @@ GROW = -0.5;
 INDEX = 0;
 
 intersection() {
-  at_vertex(POINTS[INDEX], EDGES) hub(hub_dirs(POINTS[INDEX], EDGES), START);
-  struts(EDGES, inner_dia + GROW, START + 0.3);
+    at_vertex(POINTS[INDEX], EDGES) hub(hub_dirs(POINTS[INDEX], EDGES), START);
+    struts(EDGES, inner_dia + GROW, START + 0.3);
 }
