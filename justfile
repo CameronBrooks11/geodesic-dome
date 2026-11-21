@@ -5,6 +5,17 @@ default:
 test:
     python3 tests/test_dome.py
 
+# Everything CI runs, bar the tests
+check: fmt-check
+
+# Format the .scad sources with topiary (.topiary/languages.ncl)
+fmt:
+    git ls-files -z '*.scad' | xargs -0 -r topiary format
+
+# Check the .scad sources are formatted, without changing them
+fmt-check:
+    git ls-files -z '*.scad' | xargs -0 -r -n1 topiary format --check
+
 # Print the build schedule for a dome: just schedule 3 1500
 schedule frequency="2" radius="1000":
     @openscad -D frequency={{frequency}} -D radius={{radius}} -D 'part="hub"' --export-format echo -o /dev/stdout geodesic_dome.scad 2>/dev/null | sed 's/^ECHO: //; s/^"//; s/"$//'
