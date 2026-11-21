@@ -38,7 +38,8 @@ Strut: 35 needed, chord factor 0.61803, centre to centre 618 mm, cut length 564.
 ```
 
 `just schedule 3 1500` prints it for another frequency and radius without
-opening OpenSCAD. Export each hub type with `part = "hub"`. It renders with
+opening OpenSCAD. `examples/hub_3v_pvc.scad` includes the file and sets it up
+for a 3V dome of 1/2" PVC. Export each hub type with `part = "hub"`. It renders with
 the dome's outward direction up, so every socket dips below horizontal by its
 elevation: 31.7° at 1V, 15.9° to 18° at 2V, 10° to 11.9° at 3V and 7.3° to
 9.3° at 4V.
@@ -69,7 +70,12 @@ whose base dips by 0.016 × radius between its two rings.
   socket;
 - every hub type at 2V to 4V is one piece, with 8-sided and round sockets;
 - neighbouring bores keep at least one wall apart in every hub type at 1V to
-  4V.
+  4V;
+- each example renders as one piece.
+
+Any `ERROR` or `WARNING` from OpenSCAD fails the run. `just check` checks the
+formatting: `just fmt` formats the `.scad` files with
+[topiary](https://github.com/tweag/topiary) 0.8.0.
 
 `just images` renders the pictures above.
 

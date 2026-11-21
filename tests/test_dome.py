@@ -13,6 +13,9 @@ usage: python3 tests/test_dome.py [OPENSCAD]
    octagonal and with round sockets.
 5. In every hub type at 1V to 4V, neighbouring bores keep at least one wall
    between them.
+6. Each example renders as one piece.
+
+Any ERROR or WARNING from OpenSCAD fails the run.
 """
 
 import os
@@ -40,7 +43,18 @@ def run(openscad, scad, out, defines, export="binstl"):
     cmd = [openscad, "--hardwarnings", "--export-format", export, "-o", out]
     for name, value in defines.items():
         cmd += ["-D", f"{name}={value}"]
-    return subprocess.run(cmd + [scad], capture_output=True, text=True)
+    if os.path.exists(out):
+        os.remove(out)
+    result = subprocess.run(cmd + [scad], capture_output=True, text=True)
+    # A failed assert leaves the exit status at 0, so read the messages: on stderr,
+    # and inside the file for an echo export.
+    lines = result.stderr.splitlines()
+    if export == "echo" and os.path.exists(out):
+        lines += open(out).read().splitlines()
+    bad = [l for l in lines if l.startswith(("ERROR", "WARNING"))]
+    if bad:
+        raise RuntimeError(f"{os.path.basename(scad)} {defines}: {bad[0]}")
+    return result
 
 
 def echoes(openscad, tmp, frequency):
@@ -163,6 +177,12 @@ def main():
                     touching.append(t)
             report(f"{f}V bores stay a wall apart in all {types} hub types", not touching,
                    "apart" if not touching else f"types {touching} too close")
+
+        examples = os.path.join(ROOT, "examples")
+        for name in sorted(os.listdir(examples)):
+            result = run(openscad, os.path.join(examples, name), stl, {})
+            pieces = solids(stl) if result.returncode == 0 else -1
+            report(f"examples/{name} renders one piece", pieces == 1, f"{pieces} pieces")
 
     print("all checks passed" if not failures else f"{len(failures)} failed")
     sys.exit(1 if failures else 0)

@@ -1,1 +1,3 @@
+title: geodesic-dome
+description: Printable pipe hubs for geodesic domes in OpenSCAD, with hub and strut counts and cut lengths
 models: geodesic_dome.scad
